@@ -45,7 +45,7 @@ function rowConverter(data) {
         .append('div')
         .attr('class', 'tooltip')
         .style('opacity', 0);
-// load and display the World
+
 d3.json("israel.json").then(function(topology) {
     
     var dataset = d3.csv("IsraelPop.csv", rowConverter).then( function(data) {
@@ -59,10 +59,6 @@ console.log(data);
         console.log(data.map(function(c){
         return c.Area;
     }));
-//    let density = dataset.map(({PopDensity}) => PopDensity);
-//            console.log(function(d){
-//                return dataset[d].PopDensity;
-//            });
 
     console.log(topology);
     g.selectAll("path")
@@ -71,13 +67,9 @@ console.log(data);
         .append("path")
         
     .attr("id", function(d) {
-        console.log(d.properties.NAME_1)
-        return d.properties.NAME_1;  })
-                
-//.attr("fill", (d.map(function(c){
-//        console.log(color(c.PopDensity))
-//        return color(c.PopDensity);
-//    })))
+            console.log(d.properties.NAME_1)
+            return d.properties.NAME_1; 
+        })
         .attr("fill", function(d){
         console.log(d.properties.NAME_1)
         for(var i in data){
@@ -89,43 +81,7 @@ console.log(data);
         return color(0);
     })
        .attr("d", path);
-//        .on('mouseover', function (d) {
-//           
-//            tooltip.transition()
-//                .duration(300)
-//                .style('opacity', 0.9)
-//        
-//            //https://friendlybit.com/css/make-a-tooltip-out-of-some-columns-in-a-table/
-//            //helped understand how to make a table in html
-//            tooltip.html( 
-//             //made a table with 5 rows, 4 rows with 3 cells
-//                    '<table style="table-layout:fixed;width:100%;">' +
-//                                        '<tr><td style="width:100%; text-align:center;">' + d.properties.NAME_1 + ' </td></tr>' +
-//                    '<tr><td style="text-align:left;width:33%; display:inline-block;padding:0;margin:0;">Population</td>' +
-//                    '<td style="text-align:center;width:33%;display:inline-block;padding:0;margin:0;">:</td>' +
-//                    '<td style="text-align:right;width:33%;display:inline-block;padding:0;margin:0;">' +  
-//            if(data.ID === d.properties.NAME_1){
-//                return (data[i].PopDensity);
-//        }
-//        console.log("data", data)
-//         + '</td></tr>' +
-//                    '<tr><td style="text-align:left;width:33%; display:inline-block;padding:0;margin:0;">GDP</td>' +
-//                    '<td style="text-align:center;width:33%;display:inline-block;padding:0;margin:0;">:</td>' +
-//                    '<td style="text-align:right;width:33%;display:inline-block;padding:0;margin:0;">' + d.gdp + ' Trillion</td></tr>' + '<tr><td style="text-align:left;width:33%; display:inline-block;padding:0;margin:0;">EPC</td>' +
-//                    '<td style="text-align:center;width:33%;display:inline-block;padding:0;margin:0;">:</td>' +
-//                    '<td style="text-align:right;width:33%;display:inline-block;padding:0;margin:0;">' + d.ecc + ' Million BTUs</td></tr>' +
-//                    '<tr><td style="text-align:left;width:33%; display:inline-block;padding:0;margin:0;">Total</td>' +
-//                    '<td style="text-align:center;width:33%;display:inline-block;padding:0;margin:0;">:</td>' +
-//                    '<td style="text-align:right;width:33%;display:inline-block;padding:0;margin:0;">' + d.ec + ' Trillion BTUs</td></tr>' +
-//                    '</table>')
-//               
-//                .style('left', d3.event.pageX + 5 + 'px') // positioning of where the tooltip will appear
-//                .style('top', d3.event.pageY - 28 + 'px');
-//           
-//        }) //will slowly transition the opasity to 0
-//        .on('mouseout', function () {
-//            tooltip.transition().duration(500).style("opacity", 0);
-//        });
+
 
 
 g.selectAll("rect")
@@ -148,18 +104,16 @@ g.append("text")
     .attr("fill", "#000")
     .attr("text-anchor", "start")
     .attr("font-weight", "bold")
-    .text("Population per square kilometer");
+    .text("Population Density Per Square Kilometer");
 
-//
-//g.call(d3.axisBottom(x).tickSize(13).tickValues(color.domain()))
-//  .select(".domain")
-//    .remove();
+
 g.append("g")
     .attr("transform", "translate(435,0)")
-        .call(d3.axisBottom(x).tickSize(13).tickValues(color.domain()))
-  .select(".domain")
+        .call(d3.axisBottom(x)
+              .tickSize(13)
+              .tickValues(color.domain()))
+    .select(".domain")
     .remove();
 
-                
 });
 });

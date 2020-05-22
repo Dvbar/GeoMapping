@@ -1,0 +1,16 @@
+path {
+stroke: white;
+stroke-width: 0.90px;
+/*fill: lightblue;*/
+}
+
+
+div.tooltip {
+/*    css for the toolip*/
+  position: absolute;
+  width: 240px;
+  height: 100px;
+  font: 10px sans-serif;
+  background: lightsteelblue;
+  border-radius: 8px;
+}

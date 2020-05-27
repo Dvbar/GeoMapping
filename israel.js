@@ -66,6 +66,7 @@ console.log(data);
 //using the topojson command to return the data(the arcs) needed to draw the map,
 //which will be done with the path var we made earlier
 //topojson.feature converts this topojson data to geojson
+//learned how to use topojson.feature from Mike Bostock's map https://bl.ocks.org/mbostock/5562380
     g.selectAll("path")
        .data(topojson.feature(topology, topology.objects.gadm36_ISR_1).features)
        .enter()
